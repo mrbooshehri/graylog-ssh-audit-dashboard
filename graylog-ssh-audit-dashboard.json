@@ -1,0 +1,654 @@
+{
+  "v": "1",
+  "id": "cdb69099-2afa-415b-866c-f03842ae0ab3",
+  "rev": 2,
+  "name": "SSH Sessions Audit",
+  "summary": "Comprehensive monitoring and analysis of SSH activity",
+  "description": "Certainly, here's a revised description that emphasizes the monitoring of logged-in and logged-out SSH sessions, as well as the usage details:\n\n---\n\n**Graylog SSH Sessions Audit Dashboard Context Pack**\n\nThis context pack introduces a sophisticated SSH sessions audit dashboard to Graylog, designed to provide comprehensive monitoring and analysis of SSH activity. It focuses on tracking logged-in and logged-out SSH sessions, along with detailed usage information, to enhance security and operational efficiency.\n\nThe dashboard is organized into four main sections:\n\n1. **Session Overview**: Offers a snapshot of the current SSH sessions, including the number of active sessions, recent login and logout events, and any flagged activities. This section provides a quick summary of the SSH environment's state.\n\n2. **Session Details**: Delivers detailed insights into each SSH session, including timestamps, user identities, source and destination IPs, session durations, and the status (logged in or logged out). This detailed view aids in tracking user activities and identifying any unusual patterns or potential security risks.\n\n3. **Usage Analysis**: Presents a breakdown of user activities within SSH sessions, detailing executed commands, accessed resources, and the duration of each session. This analysis helps in understanding user behavior, identifying misuse of privileges, and optimizing system usage.\n\n4. **Anomaly Detection**: Highlights any detected anomalies within SSH sessions, such as repeated failed login attempts, suspicious login patterns, or sessions that exceed typical usage durations. This feature is crucial for early detection of potential security threats and unauthorized access attempts.\n\nThe context pack is designed for seamless integration with any Graylog instance, leveraging Graylog's powerful stream and input configurations to capture SSH logs. This ensures that the dashboard displays up-to-date and accurate information, providing a centralized platform for monitoring SSH sessions and enhancing overall system security.\n\nThis tool is an invaluable asset for system administrators and security teams, offering a comprehensive view of SSH sessions and usage, which is essential for maintaining a secure and efficient IT environment.\n\n---\n\nThis description emphasizes the dashboard's capabilities in monitoring logged-in and logged-out SSH sessions, as well as the detailed usage analysis, making it clear how it can significantly contribute to security monitoring and operational efficiency within a Graylog environment.",
+  "vendor": "Mohammadreza Booshehri",
+  "url": "https://github.com/mrbooshehri/graylog-ssh-audit-dashboard",
+  "parameters": [],
+  "entities": [
+    {
+      "v": "1",
+      "type": {
+        "name": "dashboard",
+        "version": "2"
+      },
+      "id": "9f60b004-d45c-46de-8587-63da9302f348",
+      "data": {
+        "summary": {
+          "@type": "string",
+          "@value": "Audit Activity logs"
+        },
+        "search": {
+          "queries": [
+            {
+              "id": "60af2172-6f73-4edc-9056-abc39f84ca68",
+              "timerange": {
+                "from": 300,
+                "type": "relative"
+              },
+              "filters": [],
+              "query": {
+                "type": "elasticsearch",
+                "query_string": ""
+              },
+              "search_types": [
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": ""
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 604800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [
+                    "39958ec8-8526-4646-b957-4756717c9923"
+                  ],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "count",
+                      "id": "Message Count",
+                      "field": null
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": true,
+                  "row_groups": [
+                    {
+                      "type": "time",
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "interval": {
+                        "type": "auto",
+                        "scaling": 1
+                      }
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "d136819e-fa6a-4a92-bbc6-231a569c3601",
+                  "filters": [],
+                  "column_groups": [],
+                  "sort": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": ""
+                  },
+                  "name": null,
+                  "timerange": {
+                    "from": 604800,
+                    "type": "relative"
+                  },
+                  "offset": 0,
+                  "streams": [
+                    "39958ec8-8526-4646-b957-4756717c9923"
+                  ],
+                  "filter": null,
+                  "decorators": [],
+                  "type": "messages",
+                  "id": "96f63ba5-380e-4a63-af45-b8344eafb46d",
+                  "limit": 150,
+                  "filters": []
+                }
+              ]
+            },
+            {
+              "id": "311d1ce5-4340-4485-b8e8-1b26ff5d248e",
+              "timerange": {
+                "from": 300,
+                "type": "relative"
+              },
+              "filters": [],
+              "query": {
+                "type": "elasticsearch",
+                "query_string": ""
+              },
+              "search_types": [
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "message: \"removed\""
+                  },
+                  "name": null,
+                  "timerange": {
+                    "from": 604800,
+                    "type": "relative"
+                  },
+                  "offset": 0,
+                  "streams": [
+                    "39958ec8-8526-4646-b957-4756717c9923"
+                  ],
+                  "filter": null,
+                  "decorators": [],
+                  "type": "messages",
+                  "id": "9c9b6e09-160f-47a5-8e26-c5af206651c3",
+                  "limit": 150,
+                  "filters": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": ""
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 604800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [
+                    "39958ec8-8526-4646-b957-4756717c9923"
+                  ],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "count",
+                      "id": "Login/User",
+                      "field": "USERNAME"
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": true,
+                  "row_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "USERNAME"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": true
+                    },
+                    {
+                      "type": "values",
+                      "fields": [
+                        "gl2_remote_ip",
+                        "source"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": true
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "2affade8-a5ea-49da-ab35-030c63b8f10e",
+                  "filters": [],
+                  "column_groups": [],
+                  "sort": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": ""
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 604800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [
+                    "39958ec8-8526-4646-b957-4756717c9923"
+                  ],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "count",
+                      "id": "Message Count",
+                      "field": null
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": true,
+                  "row_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "USERNAME"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": true
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "6b82f66d-84a8-4ad1-8376-e3111e32a95b",
+                  "filters": [],
+                  "column_groups": [],
+                  "sort": []
+                }
+              ]
+            }
+          ],
+          "parameters": [],
+          "requires": {},
+          "owner": "admin",
+          "created_at": "2024-05-10T07:44:54.046Z"
+        },
+        "created_at": "2024-05-10T06:32:22.893Z",
+        "requires": {},
+        "state": {
+          "60af2172-6f73-4edc-9056-abc39f84ca68": {
+            "selected_fields": null,
+            "static_message_list_id": null,
+            "titles": {
+              "widget": {
+                "ec6ac9b0-72f8-4c91-b603-329e7ed339b2": "Message Table",
+                "e8b7b29d-6e7d-488b-88e0-864652e35585": "Sessons Count"
+              },
+              "tab": {
+                "title": "Audits"
+              }
+            },
+            "widgets": [
+              {
+                "id": "e8b7b29d-6e7d-488b-88e0-864652e35585",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 604800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": ""
+                },
+                "streams": [
+                  "39958ec8-8526-4646-b957-4756717c9923"
+                ],
+                "config": {
+                  "visualization": "bar",
+                  "column_limit": null,
+                  "event_annotation": false,
+                  "row_limit": null,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "type": "time",
+                      "config": {
+                        "interval": {
+                          "type": "auto",
+                          "scaling": 1
+                        }
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": "Message Count"
+                      },
+                      "function": "count()"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [],
+                  "visualization_config": {
+                    "barmode": "group",
+                    "axis_type": "linear"
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              },
+              {
+                "id": "ec6ac9b0-72f8-4c91-b603-329e7ed339b2",
+                "type": "messages",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 604800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": ""
+                },
+                "streams": [
+                  "39958ec8-8526-4646-b957-4756717c9923"
+                ],
+                "config": {
+                  "fields": [
+                    "timestamp",
+                    "source",
+                    "gl2_remote_ip",
+                    "message",
+                    "application_name"
+                  ],
+                  "show_message_row": false,
+                  "show_summary": false,
+                  "decorators": [],
+                  "sort": [
+                    {
+                      "type": "pivot",
+                      "field": "timestamp",
+                      "direction": "Descending"
+                    }
+                  ]
+                }
+              }
+            ],
+            "widget_mapping": {
+              "e8b7b29d-6e7d-488b-88e0-864652e35585": [
+                "d136819e-fa6a-4a92-bbc6-231a569c3601"
+              ],
+              "ec6ac9b0-72f8-4c91-b603-329e7ed339b2": [
+                "96f63ba5-380e-4a63-af45-b8344eafb46d"
+              ]
+            },
+            "positions": {
+              "e8b7b29d-6e7d-488b-88e0-864652e35585": {
+                "col": 1,
+                "row": 1,
+                "height": 2,
+                "width": "Infinity"
+              },
+              "ec6ac9b0-72f8-4c91-b603-329e7ed339b2": {
+                "col": 1,
+                "row": 3,
+                "height": 5,
+                "width": "Infinity"
+              }
+            },
+            "formatting": {
+              "highlighting": []
+            },
+            "display_mode_settings": {
+              "positions": {}
+            }
+          },
+          "311d1ce5-4340-4485-b8e8-1b26ff5d248e": {
+            "selected_fields": null,
+            "static_message_list_id": null,
+            "titles": {
+              "widget": {
+                "da43708e-469b-4d1c-9406-4491a1a4e9e3": "User Stats",
+                "b2734bdc-77d2-4629-862f-8dddca1a852b": "Loged in Users",
+                "381a066a-dad5-47e7-ba8f-719759968d70": "User Stats (copy)",
+                "a83a6194-1e08-4f13-93df-6767c200ae9f": "Loged in Users (copy)",
+                "2845fa4f-cf6f-4b3d-b2a3-3dd280a2c25a": "Loged Out users"
+              },
+              "tab": {
+                "title": "Status"
+              }
+            },
+            "widgets": [
+              {
+                "id": "b2734bdc-77d2-4629-862f-8dddca1a852b",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 604800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": ""
+                },
+                "streams": [
+                  "39958ec8-8526-4646-b957-4756717c9923"
+                ],
+                "config": {
+                  "visualization": "pie",
+                  "column_limit": null,
+                  "event_annotation": false,
+                  "row_limit": 15,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "USERNAME"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15,
+                        "skip_empty_values": true
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": "Message Count"
+                      },
+                      "function": "count()"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [],
+                  "visualization_config": null,
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              },
+              {
+                "id": "2845fa4f-cf6f-4b3d-b2a3-3dd280a2c25a",
+                "type": "messages",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 604800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "message: \"removed\""
+                },
+                "streams": [
+                  "39958ec8-8526-4646-b957-4756717c9923"
+                ],
+                "config": {
+                  "fields": [
+                    "timestamp",
+                    "gl2_remote_ip",
+                    "source"
+                  ],
+                  "show_message_row": true,
+                  "show_summary": true,
+                  "decorators": [],
+                  "sort": [
+                    {
+                      "type": "pivot",
+                      "field": "timestamp",
+                      "direction": "Descending"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "da43708e-469b-4d1c-9406-4491a1a4e9e3",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 604800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": ""
+                },
+                "streams": [
+                  "39958ec8-8526-4646-b957-4756717c9923"
+                ],
+                "config": {
+                  "visualization": "table",
+                  "column_limit": null,
+                  "event_annotation": false,
+                  "row_limit": 15,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "USERNAME"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15,
+                        "skip_empty_values": true
+                      }
+                    },
+                    {
+                      "fields": [
+                        "gl2_remote_ip",
+                        "source"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15,
+                        "skip_empty_values": true
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": "Login/User"
+                      },
+                      "function": "count(USERNAME)"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [],
+                  "visualization_config": {
+                    "pinned_columns": []
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              }
+            ],
+            "widget_mapping": {
+              "2845fa4f-cf6f-4b3d-b2a3-3dd280a2c25a": [
+                "9c9b6e09-160f-47a5-8e26-c5af206651c3"
+              ],
+              "b2734bdc-77d2-4629-862f-8dddca1a852b": [
+                "6b82f66d-84a8-4ad1-8376-e3111e32a95b"
+              ],
+              "da43708e-469b-4d1c-9406-4491a1a4e9e3": [
+                "2affade8-a5ea-49da-ab35-030c63b8f10e"
+              ]
+            },
+            "positions": {
+              "2845fa4f-cf6f-4b3d-b2a3-3dd280a2c25a": {
+                "col": 1,
+                "row": 6,
+                "height": 3,
+                "width": "Infinity"
+              },
+              "b2734bdc-77d2-4629-862f-8dddca1a852b": {
+                "col": 1,
+                "row": 1,
+                "height": 5,
+                "width": 6
+              },
+              "da43708e-469b-4d1c-9406-4491a1a4e9e3": {
+                "col": 7,
+                "row": 1,
+                "height": 5,
+                "width": 6
+              }
+            },
+            "formatting": {
+              "highlighting": []
+            },
+            "display_mode_settings": {
+              "positions": {}
+            }
+          }
+        },
+        "properties": [],
+        "owner": "admin",
+        "title": {
+          "@type": "string",
+          "@value": "Audit"
+        },
+        "type": "DASHBOARD",
+        "description": {
+          "@type": "string",
+          "@value": ""
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.7+5e29a2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "stream",
+        "version": "1"
+      },
+      "id": "39958ec8-8526-4646-b957-4756717c9923",
+      "data": {
+        "alarm_callbacks": [],
+        "outputs": [],
+        "remove_matches": {
+          "@type": "boolean",
+          "@value": true
+        },
+        "title": {
+          "@type": "string",
+          "@value": "SSH Sessions"
+        },
+        "stream_rules": [
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": "Session|session"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": false
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          }
+        ],
+        "alert_conditions": [],
+        "matching_type": {
+          "@type": "string",
+          "@value": "AND"
+        },
+        "disabled": {
+          "@type": "boolean",
+          "@value": false
+        },
+        "description": {
+          "@type": "string",
+          "@value": "Stream containing all SSH session events"
+        },
+        "default_stream": {
+          "@type": "boolean",
+          "@value": false
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.7+5e29a2c"
+        }
+      ]
+    }
+  ]
+}
